@@ -16,56 +16,66 @@
 			var flashvars = {};
 			var params = {};
 			var attributes = {};
-					
-			
+
+
 			params.bgcolor="#FFFFFF"; 
-			
+
 			attributes.name = "";
 			attributes.styleclass = "";
 			attributes.align = "middle";			
 			swfobject.embedSWF("Arunhall.swf", "flashContent", "800", "600", "9.0.0", false, flashvars, params, attributes);
 		</script>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,400,700' rel='stylesheet' type='text/css'>
+
 	</head>
 	<body>
-		<div id="container" style="width: 800px; margin: 0 auto;">
+		<div id="container">
 			<div id="flashContent">
 				Get <a href="http://www.adobe.com/go/getflash">Adobe Flash Player</a>. Embedded with the help of <a href="http://embed-swf.org">embed-swf.org</a>.
 			</div>
+			
 
-			<h3>We love feedback!</h3>
-			<p>Email: <a href="mailto:pxwings@gmail.com">pxwings@gmail.com</a></p>
-			<p>Twitter: <a href="http://twitter.com/pixel_wings">@Pixel_Wings</a></p>
+			<section class="column">
+				<h3>Changelog</h3>
+				<h4>0.0.3, July 19th, 2014</h4>
+				<ul>
+					<li>New switch and gate mechanic</li>
+					<li>Fixed camera on respawn</li>
+					<li>New elevator mechanic</li>
+					<li>Updated demo level</li>
+					<li>Find all the secrets!<li>
+				</ul>
+				<h4>0.0.2, July 18th, 2014</h4>
+				<ul>
+					<li>Removed player "sliding"</li>
+					<li>Improved camera's foresight</li>
+					<li>Decreased zoom to improve foresight</li>
+					<li>Updated demo level</li>
+					<li>Player respawns upon death</li>
+				</ul>
+				<h4>0.0.1, July 18th, 2014</h4>
+				<ul>
+					<li>Initial Demo</li>
+				</ul>
+			</section>
 
-			<h3>Controls</h3>
-			<ul>
-				<li>Move: WSAD/Arrow Keys</li>
-				<li>Jump: Spacebar</li>
-				<li>Jump Down: Spacebar + S/Down Arrow</li>
-				<li>Attack: J (Provides hangtime)</li>
-				<li>Restart: R</li>
-			</ul>
+			<section class="column">
+				<h3>We love feedback!</h3>
+				<p>Email: <a href="mailto:pxwings@gmail.com">pxwings@gmail.com</a></p>
+				<p>Twitter: <a href="http://twitter.com/pixel_wings">@Pixel_Wings</a></p>
+			</section>
 
-			<h3>Changelog</h3>
-			<h4>0.0.3, July 19th, 2014</h4>
-			<ul>
-				<li>New switch and gate mechanic</li>
-				<li>Fixed camera on respawn</li>
-				<li>New elevator mechanic</li>
-				<li>Updated demo level</li>
-				<li>Find all the secrets!<li>
-			</ul>
-			<h4>0.0.2, July 18th, 2014</h4>
-			<ul>
-				<li>Removed player "sliding"</li>
-				<li>Improved camera's foresight</li>
-				<li>Decreased zoom to improve foresight</li>
-				<li>Updated demo level</li>
-				<li>Player respawns upon death</li>
-			</ul>
-			<h4>0.0.1, July 18th, 2014</h4>
-			<ul>
-				<li>Initial Demo</li>
-			</ul>
+			<section class="column">
+				<h3>Controls</h3>
+				<ul>
+					<li>Move: WSAD/Arrow Keys</li>
+					<li>Jump: Spacebar</li>
+					<li>Jump Down: Spacebar + S/Down Arrow</li>
+					<li>Attack: J (Provides hangtime)</li>
+					<li>Restart: R</li>
+				</ul>
+			</section>
 		</div>
 	</body>
 </html>
