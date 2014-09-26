@@ -12,6 +12,7 @@ function rand (num) {
 Game.Load = function (game) { };
 
 Game.Load.prototype = {
+    
     preload: function () {
         game.stage.backgroundColor = '#34495e';
         label = game.add.text(w / 2, h / 2, 'loading...', { font: '30px Arial', fill: '#fff' });

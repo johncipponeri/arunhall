@@ -45,6 +45,12 @@ Game.Play.prototype = {
         this.drawGrid(level + 1, level + 1, 270 / (level + 1));
     },
     
+    // Generate Random Hex Color
+    // http://www.paulirish.com/2009/random-hex-color-code-snippets/
+    randHex: function () {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);   
+    },
+    
     // Manipulate color
     // http://www.sitepoint.com/javascript-generate-lighter-darker-color/
     colorLuminance: function(hex, lum) {
@@ -74,19 +80,7 @@ Game.Play.prototype = {
         this.graphics.clear();
         
         // Generate level color
-        var colorNum = rand(5);
-        
-        // Which color? No color twice in a row
-        if (colorNum == 0 && this.baseColor != "#009999")
-            this.baseColor = "#009999";
-        else if (colorNum == 1 && this.baseColor != "#d273b1")
-            this.baseColor = "#d273b1";
-        else if (colorNum == 2 && this.baseColor != "#6bd10c")
-            this.baseColor = "#6bd10c";
-        else if (colorNum == 3 && this.baseColor != "#622e36")
-            this.baseColor = "#622e36";
-        else if (colorNum == 4 && this.baseColor != "#7ea099")
-            this.baseColor = "#7ea099";
+        this.baseColor = this.randHex();
         
         // Lighten color for answer piece
         var color = this.colorLuminance(this.baseColor, (20 - level * 1.15) / 100);
