@@ -119,13 +119,13 @@ Game.Play.prototype = {
     // Increment Score,
     // Reset State
     nextLevel: function (player, bush) {
-        if (score == 3)
-            game.state.start('Over');
-        
         if (bush.y == goal.y)
             score += 1;
         
-        game.state.start('Play');
+        if (score == 4)
+            game.state.start('Over');
+        else
+            game.state.start('Play');
     },
     
     addBushes: function () {
@@ -207,10 +207,10 @@ Game.Play.prototype = {
                     game.world.setBounds(0, 0, game.width, game.height); // normalize after shake?
             }
             
-            label = game.add.text(w / 2, h / 2, 'game over\n\nscore: '+score+'\n\npress the UP arrow key\nto restart', { font: '30px Arial', fill: '#fff', align: 'center' });   
+            label = game.add.text(w / 2, h / 2, 'game over\n\nscore: ' + score + '\n\npress the UP arrow key\nto restart', { font: '30px Arial', fill: '#fff', align: 'center' });   
             label.anchor.setTo(0.5, 0.5);
             
-            if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+            if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && shakeWorldTime == 0) {
                 score = 0;
                 game.state.start('Play');
             }
@@ -219,8 +219,8 @@ Game.Play.prototype = {
         // Spawn New Enemies
         } else {
             if (!isMoving) {
-                if (score == 3)
-                    game.physics.overlap(this.player, this.goal, this.nextLevel);
+                if (score >= 3)
+                    game.physics.overlap(this.player, goal, this.nextLevel);
                 else
                     game.physics.overlap(this.player, this.bushes, this.nextLevel);
                 
