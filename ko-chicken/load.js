@@ -21,6 +21,7 @@ Game.Load.prototype = {
         game.load.spritesheet('hat', 'images/hat.png', 42, 71);
         game.load.spritesheet('monocle', 'images/monocle.png', 42, 71);
         game.load.spritesheet('suit', 'images/suit.png', 42, 71);
+        game.load.spritesheet('chicken_suit', 'images/costume.png', 42, 71);
         game.load.spritesheet('chicken_f', 'images/chicken_f.png', 42, 51);
         game.load.spritesheet('taxi', 'images/taxi.png', 40, 30);
         game.load.spritesheet('bush', 'images/bush.png', 50, 32);

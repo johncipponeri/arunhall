@@ -42,7 +42,11 @@ Game.Play.prototype = {
         this.bushes.createMultiple(30, 'taxi');
         
         // Create Player
-        this.player = game.add.sprite(36, h / 2, 'chicken_m');
+        if (score < 3)
+            this.player = game.add.sprite(36, h / 2, 'chicken_m');
+        else
+            this.player = game.add.sprite(36, h / 2, 'chicken_suit');
+        
         this.player.anchor.setTo(0.5, 0.5);
         
         // Reset Restrictions
@@ -50,7 +54,8 @@ Game.Play.prototype = {
         isDead = false;
         
         // Spawn Bushes
-        this.addBushes();
+        if (score < 3)
+            this.addBushes();
         
         // Show Trophies
         if (score >= 1) {
@@ -58,9 +63,8 @@ Game.Play.prototype = {
             if (score >= 2) {
                 game.add.sprite(10, 10, 'suit');
                     if (score >= 3) {
-                        game.add.sprite(10, 10, 'hat');
-                            //if (score == 4)
-                                // win
+                        game.add.sprite(10, 10, 'hat');    
+                        goal = game.add.sprite(338, Math.floor(Math.random() * h - 42), 'chicken_f');
                     }
             }
         }
@@ -115,6 +119,9 @@ Game.Play.prototype = {
     // Increment Score,
     // Reset State
     nextLevel: function (player, bush) {
+        if (score == 3)
+            game.state.start('Over');
+        
         if (bush.y == goal.y)
             score += 1;
         
@@ -130,7 +137,11 @@ Game.Play.prototype = {
             count = 2;
         
         for (var b = 0; b < count; b++) {
-            var randy = game.rnd.integerInRange(32, 328);
+            var randy = game.rnd.integerInRange(32, 300) + Math.floor(Math.random() * 40);
+            
+            if (randy > 300)
+                randY = 300;
+            
             this.bushes.add(game.add.sprite(338, randy, 'bush'));
         }
             
@@ -208,7 +219,11 @@ Game.Play.prototype = {
         // Spawn New Enemies
         } else {
             if (!isMoving) {
-                game.physics.overlap(this.player, this.bushes, this.nextLevel);
+                if (score == 3)
+                    game.physics.overlap(this.player, this.goal, this.nextLevel);
+                else
+                    game.physics.overlap(this.player, this.bushes, this.nextLevel);
+                
                 game.physics.overlap(this.player, this.taxies, this.hitPlayer);
             }
 
