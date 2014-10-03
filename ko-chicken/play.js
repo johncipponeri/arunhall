@@ -8,6 +8,8 @@ var shakeWorldTimeMax = 40;
 var isMoving = false;
 var isDead = false;
 
+var goal = null;
+
 Game.Play = function (game) { };
 
 Game.Play.prototype = {
@@ -35,19 +37,33 @@ Game.Play.prototype = {
         // Enemy Spawn Timer
         this.enemyTime = 0;
         
-        // Level End Goal
-        this.goal = game.add.sprite(338, Math.floor(Math.random() * h - 42), 'chicken_f');
+        // Bushes
+        this.bushes = game.add.group();
+        this.bushes.createMultiple(30, 'taxi');
         
         // Create Player
         this.player = game.add.sprite(36, h / 2, 'chicken_m');
         this.player.anchor.setTo(0.5, 0.5);
         
-        // Display Score
-        this.labelScore = game.add.text(15, 10, 'score: ' + score, { font: '20px Arial', fill: '#fff' });
-        
         // Reset Restrictions
         isMoving = false;
         isDead = false;
+        
+        // Spawn Bushes
+        this.addBushes();
+        
+        // Show Trophies
+        if (score >= 1) {
+            game.add.sprite(10, 10, 'monocle');
+            if (score >= 2) {
+                game.add.sprite(10, 10, 'suit');
+                    if (score >= 3) {
+                        game.add.sprite(10, 10, 'hat');
+                            //if (score == 4)
+                                // win
+                    }
+            }
+        }
     },
     
     // Movement Functions
@@ -98,10 +114,27 @@ Game.Play.prototype = {
     // Next Level
     // Increment Score,
     // Reset State
-    nextLevel: function (player, goal) {
-        score += 1;
+    nextLevel: function (player, bush) {
+        if (bush.y == goal.y)
+            score += 1;
         
         game.state.start('Play');
+    },
+    
+    addBushes: function () {
+        this.bushes.removeAll();
+        
+        var count = score;
+        
+        if (count < 2)
+            count = 2;
+        
+        for (var b = 0; b < count; b++) {
+            var randy = game.rnd.integerInRange(32, 328);
+            this.bushes.add(game.add.sprite(338, randy, 'bush'));
+        }
+            
+        goal = this.bushes.getRandom();
     },
     
     // Spawn a New Taxi
@@ -136,7 +169,7 @@ Game.Play.prototype = {
         
         // Move, Rotate Player
         // Shake Screen
-        game.add.tween(player).to( { x: w / 2, y: h / 2}, 300, Phaser.Easing.Linear.InOut, true).onUpdateCallback(function () { 
+        game.add.tween(player).to( { x: w / 2, y: h / 2}, 100, Phaser.Easing.Linear.InOut, true).onUpdateCallback(function () { 
             player.angle += 20;
             player.scale.x += 0.3; 
             player.scale.y += 0.3; 
@@ -175,7 +208,7 @@ Game.Play.prototype = {
         // Spawn New Enemies
         } else {
             if (!isMoving) {
-                game.physics.overlap(this.player, this.goal, this.nextLevel);
+                game.physics.overlap(this.player, this.bushes, this.nextLevel);
                 game.physics.overlap(this.player, this.taxies, this.hitPlayer);
             }
 
