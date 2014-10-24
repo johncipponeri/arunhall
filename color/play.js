@@ -90,7 +90,7 @@ Game.Play.prototype = {
         var answerY = rand(level + 1);
         
         // Add piece to grid
-        this.answerRect = new Phaser.Rectangle((answerX * spacing) + 45, (answerY * spacing) + 55, 960 / (level + 1), 960 / (level + 1));
+        this.answerRect = new Phaser.Rectangle((answerX * spacing) + 60, (answerY * spacing) + 420, 960 / (level + 1), 960 / (level + 1));
         
         // Draw grid
         for (var y = 0; y < height; y++) {
