@@ -1,7 +1,7 @@
 Game = {};
 
-var w = 350;
-var h = 350;
+var w = 1080;
+var h = 1920;
 var level = 0;
 var time = 11;
 
