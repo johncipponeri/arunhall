@@ -42,7 +42,7 @@ Game.Play.prototype = {
     nextLevel: function() {
         level++;
         
-        this.drawGrid(level + 1, level + 1, 30);//270 / (level + 1));
+        this.drawGrid(level + 1, level + 1, 980 / (level + 1));
     },
     
     // Generate Random Hex Color
@@ -90,7 +90,7 @@ Game.Play.prototype = {
         var answerY = rand(level + 1);
         
         // Add piece to grid
-        this.answerRect = new Phaser.Rectangle((answerX * spacing) + 45, (answerY * spacing) + 55, 250 / (level + 1), 250 / (level + 1));
+        this.answerRect = new Phaser.Rectangle((answerX * spacing) + 45, (answerY * spacing) + 55, 960 / (level + 1), 960 / (level + 1));
         
         // Draw grid
         for (var y = 0; y < height; y++) {
