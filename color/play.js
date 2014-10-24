@@ -100,7 +100,7 @@ Game.Play.prototype = {
                 else
                     this.graphics.beginFill("0x" + this.baseColor.substr(1), 1);
                 
-                this.graphics.drawRect((x * spacing) + 45, (y * spacing) + 55, 960 / width, 960 / height);
+                this.graphics.drawRect((x * spacing) + 60, (y * spacing) + 420, 960 / width, 960 / height);
             }
         }
     },
