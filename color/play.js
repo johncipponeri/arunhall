@@ -42,7 +42,7 @@ Game.Play.prototype = {
     nextLevel: function() {
         level++;
         
-        this.drawGrid(level + 1, level + 1, 270 / (level + 1));
+        this.drawGrid(level + 1, level + 1, 30);//270 / (level + 1));
     },
     
     // Generate Random Hex Color
