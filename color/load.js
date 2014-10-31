@@ -13,8 +13,8 @@ Game.Load = function (game) { };
 Game.Load.prototype = {
     
     preload: function () {
-        game.stage.backgroundColor = '#34495e';
-        label = game.add.text(w / 2, h / 2, 'loading...', { font: '30px Arial', fill: '#fff' });
+        game.stage.backgroundColor = '#fff';
+        label = game.add.text(w / 2, h / 2, 'loading...', { font: '30px Arial', fill: '#000' });
         label.anchor.setTo(0.5, 0.5);
         
         // load assets here

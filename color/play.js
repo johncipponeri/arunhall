@@ -12,21 +12,35 @@ Game.Play.prototype = {
         this.titleTop = h * 0.04; // 75 (4% of height)
         this.uiTop = h * 0.13; // 250 (13% of height)
         
+        this.titleFontSize = h * 0.0416; // 80 (4.16% of height)
+        this.scoreFontSize = h * 0.026; // 50 (2.6% of height)
+        
+        this.pieRadius = h * 0.013; // 25 (1.3% of height)
+        this.pieRight = (this.squareSpacing + this.xSpacing) - this.pieRadius * 2; // edge of single square - diameter
+        
         // Initialize Keys
         this.cursor = game.input.keyboard.createCursorKeys();
         // Initialize Graphics Renderer
         this.graphics = game.add.graphics(0, 0);
         
         // Title label
-        this.titleLabel = game.add.text(Math.floor(w / 2), this.titleTop, 'q u i c k  f l i p', { font: '80px "Varela Round"', fill: '#fff' });
+        var titleStyle = {
+            font: this.titleFontSize.toString() + 'px "Varela Round"',
+            fill: '#000'
+        };
+        this.titleLabel = game.add.text(Math.floor(w / 2), this.titleTop, 'q u i c k  f l i p', titleStyle);
         this.titleLabel.anchor.setTo(0.5, 0);
         
         // Score Label
-        this.labelScore = game.add.text(Math.floor(w / 2), this.uiTop, '0', { font: '50px "Varela Round"', fill: '#fff' });
+        var scoreStyle = {
+            font: this.scoreFontSize.toString() + 'px "Varela Round"',
+            fill: '#000'
+        };
+        this.labelScore = game.add.text(Math.floor(w / 2), this.uiTop, '0', scoreStyle);
         this.labelScore.anchor.setTo(0.5, 0);
         
         // Start Label
-	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#fff' });
+	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#000' });
 	    this.labelKeys.anchor.setTo(0.5, 1);
         
         // Next-level piece
@@ -42,7 +56,7 @@ Game.Play.prototype = {
         this.baseColor = "";
         
         // Pie timer
-        this.pie = new PieProgress(game, 1000, this.uiTop, 25, '#fff');
+        this.pie = new PieProgress(game, this.pieRight, this.uiTop + this.pieRadius / 2, this.pieRadius, '#000');
         game.add.existing(this.pie);
         
         // Start timer
@@ -67,6 +81,7 @@ Game.Play.prototype = {
         if (level >= 9)
             height = 9;
         
+        this.labelScore.text = (level - 1) * 10;
         this.drawGrid(width, height, this.squareSpacing / width);
     },
     
@@ -178,7 +193,7 @@ PieProgress = function(game, x, y, radius, color, angle) {
    
     this.anchor.setTo(0.5);
     this.angle = angle || -90;
-    this.color = color || "#fff";
+    this.color = color || "#000";
     
     this.updateProgress();
 }
