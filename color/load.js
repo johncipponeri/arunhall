@@ -1,7 +1,7 @@
 Game = {};
 
-var w = 1080; //window.innerWidth;
-var h = 1920; //window.innerHeight;
+var w = window.innerWidth;
+var h = window.innerHeight;
 var level = 0;
 
 function rand (num) {
