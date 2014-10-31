@@ -1,9 +1,8 @@
 Game = {};
 
-var w = 1080;
-var h = 1920;
+var w = 1080; //window.innerWidth;
+var h = 1920; //window.innerHeight;
 var level = 0;
-var time = 11;
 
 function rand (num) {
     return Math.floor(Math.random() * num);   
