@@ -39,6 +39,14 @@ Game.Play.prototype = {
         this.labelScore = game.add.text(Math.floor(w / 2), this.uiTop, '0', scoreStyle);
         this.labelScore.anchor.setTo(0.5, 0);
         
+        // Back arrow hitbox
+        this.backRect = new Phaser.Rectangle(this.xSpacing, this.uiTop, this.pieRadius * 2, this.pieRadius * 2);
+        // Add Back arrow to screen
+        this.backP1 = new Phaser.Point(this.backRect.x, this.backRect.y + this.backRect.height / 2);
+        this.backP2 = new Phaser.Point(this.backRect.x + this.backRect.width, this.backRect.y);
+        this.backP3 = new Phaser.Point(this.backRect.x + this.backRect.width, this.backRect.y + this.backRect.height);
+        this.drawBack("0x000");
+        
         // Start Label
 	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#000' });
 	    this.labelKeys.anchor.setTo(0.5, 1);
@@ -56,7 +64,7 @@ Game.Play.prototype = {
         this.baseColor = "";
         
         // Pie timer
-        this.pie = new PieProgress(game, this.pieRight, this.uiTop + this.pieRadius / 2, this.pieRadius, '#000');
+        this.pie = new PieProgress(game, this.pieRight, this.uiTop + this.pieRadius, this.pieRadius, '#000');
         game.add.existing(this.pie);
         
         // Start timer
@@ -85,6 +93,15 @@ Game.Play.prototype = {
         this.drawGrid(width, height, this.squareSpacing / width);
     },
     
+    // Draws back arrow
+    drawBack: function(color) {
+        this.graphics.beginFill(color);
+        this.graphics.moveTo(this.backP1.x, this.backP1.y);
+        this.graphics.lineTo(this.backP2.x, this.backP2.y);
+        this.graphics.lineTo(this.backP3.x, this.backP3.y);
+        this.graphics.lineTo(this.backP1.x, this.backP1.y);
+    },
+    
     // Draw squares in level
     drawGrid: function(width, height, spacing) {
         // Clear screen
@@ -95,6 +112,9 @@ Game.Play.prototype = {
         
         // Update timer color
         this.pie.color = this.baseColor;
+        
+        // Update back color
+        this.drawBack("0x" + this.baseColor.substr(1), 1);
         
         // Lighten color for answer piece
         var color = this.colorLuminance(this.baseColor, (20 - level * 1.15) / 100);
@@ -134,9 +154,11 @@ Game.Play.prototype = {
             this.firstKey = true;
             this.game.add.tween(this.labelKeys).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None).start();
             
+            // Start Pie Timer
             this.pieTween.onComplete.add(this.timeOut);
             this.pieTween.start();
             
+            // Draw puzzle
             this.nextLevel();
         }
 
@@ -144,13 +166,15 @@ Game.Play.prototype = {
         if (!this.firstKey)
             return;
         
-        // Check if clicked answer piece
+        // Check if clicked something
         if (game.input.activePointer.isDown) {
             var touchX = game.input.activePointer.x;
             var touchY = game.input.activePointer.y;
             
             if (this.answerRect.contains(touchX, touchY))
                 this.nextLevel();
+            else if (this.backRect.contains(touchX, touchY))
+                this.timeOut();
         }
     },
     
