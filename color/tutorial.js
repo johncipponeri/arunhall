@@ -19,7 +19,7 @@ Game.Tutorial.prototype = {
         this.textTop = h * 0.304; // 585
         this.textW = w * 0.768; // 830
         
-        var text = "Flip all of the lighter colored tiles on the board\r\rMove from board to board as quickly as possible to increase points earned\r\rCompleting a board adds time to the clock\r\r\Compete versus firends to get the most points"
+        var text = "Flip all of the differently colored tiles on the board\r\rMove from board to board as quickly as possible to increase points earned\r\rCompleting a board adds time to the clock\r\r\Compete versus firends to get the most points"
         
         var textStyle = {
             font: this.textFontSize.toString() + 'px "Varela Round"',
