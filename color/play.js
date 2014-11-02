@@ -26,7 +26,7 @@ Game.Play.prototype = {
         // Title label
         var titleStyle = {
             font: this.titleFontSize.toString() + 'px "Varela Round"',
-            fill: '#000'
+            fill: '#424143'
         };
         this.titleLabel = game.add.text(Math.floor(w / 2), this.titleTop, 'q u i c k  f l i p', titleStyle);
         this.titleLabel.anchor.setTo(0.5, 0);
@@ -34,7 +34,7 @@ Game.Play.prototype = {
         // Score Label
         var scoreStyle = {
             font: this.scoreFontSize.toString() + 'px "Varela Round"',
-            fill: '#000'
+            fill: '#424143'
         };
         this.labelScore = game.add.text(Math.floor(w / 2), this.uiTop, '0', scoreStyle);
         this.labelScore.anchor.setTo(0.5, 0);
@@ -45,10 +45,10 @@ Game.Play.prototype = {
         this.backP1 = new Phaser.Point(this.backRect.x, this.backRect.y + this.backRect.height / 2);
         this.backP2 = new Phaser.Point(this.backRect.x + this.backRect.width, this.backRect.y);
         this.backP3 = new Phaser.Point(this.backRect.x + this.backRect.width, this.backRect.y + this.backRect.height);
-        this.drawBack("0x000");
+        this.drawBack("0x424143");
         
         // Start Label
-	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#000' });
+	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#424143' });
 	    this.labelKeys.anchor.setTo(0.5, 1);
         
         // Next-level piece
@@ -68,7 +68,7 @@ Game.Play.prototype = {
         game.add.existing(this.pie);
         
         // Start timer
-        this.pieTween = game.add.tween(this.pie).from({progress: 0}, 10000, 
+        this.pieTween = game.add.tween(this.pie).from({progress: 0}, 5000, 
         Phaser.Easing.Linear.InOut, false, 0, 0, false);
     },
     
@@ -117,7 +117,8 @@ Game.Play.prototype = {
         this.drawBack("0x" + this.baseColor.substr(1), 1);
         
         // Lighten color for answer piece
-        var color = this.colorLuminance(this.baseColor, (20 - level * 1.15) / 100);
+        var lum = (level % 2) == 0 ? 10 - (level - 1) : -10 - level;
+        var color = this.colorLuminance(this.baseColor, lum / 100);
         
         // Generate random answer piece
         var answerX = rand(width);
@@ -217,7 +218,7 @@ PieProgress = function(game, x, y, radius, color, angle) {
    
     this.anchor.setTo(0.5);
     this.angle = angle || -90;
-    this.color = color || "#000";
+    this.color = color || "#424143";
     
     this.updateProgress();
 }
