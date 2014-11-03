@@ -23,6 +23,10 @@ Game.Play.prototype = {
         // Initialize Graphics Renderer
         this.graphics = game.add.graphics(0, 0);
         
+        // Start Music
+        this.music = game.add.audio('background');
+        this.music.play();
+        
         // Title label
         var titleStyle = {
             font: this.titleFontSize.toString() + 'px "Varela Round"',
@@ -48,8 +52,8 @@ Game.Play.prototype = {
         this.drawBack("0x424143");
         
         // Start Label
-	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, h - 50, 'tap to begin', { font: '20px Arial', fill: '#424143' });
-	    this.labelKeys.anchor.setTo(0.5, 1);
+	    this.labelKeys = game.add.text(Math.floor(w / 2) + 1, Math.floor(h / 2), 'tap to begin', { font: '40px Arial', fill: '#424143' });
+	    this.labelKeys.anchor.setTo(0.5, 0.5);
         
         // Next-level piece
         this.answerRect = null;
@@ -74,6 +78,7 @@ Game.Play.prototype = {
     
     // Time ran out
     timeOut: function () {
+        this.music.pause();
         game.state.start('Over');   
     },
     
@@ -117,7 +122,7 @@ Game.Play.prototype = {
         this.drawBack("0x" + this.baseColor.substr(1), 1);
         
         // Lighten color for answer piece
-        var lum = (level % 2) == 0 ? 15 - (level - 1) : -15 - level;
+        var lum = (level % 2) == 0 ? 20 - (level - 1) : -20 - level;
         var color = this.shadeColor(this.baseColor, lum / 100);
         
         // Generate random answer piece
@@ -153,7 +158,7 @@ Game.Play.prototype = {
         // Start game?
         if (game.input.activePointer.isDown && !this.firstKey) {
             this.firstKey = true;
-            this.game.add.tween(this.labelKeys).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None).start();
+            this.game.add.tween(this.labelKeys).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None).start();
             
             // Start Pie Timer
             this.pieTween.onComplete.add(this.timeOut);
