@@ -23,10 +23,6 @@ Game.Play.prototype = {
         // Initialize Graphics Renderer
         this.graphics = game.add.graphics(0, 0);
         
-        // Start Music
-        this.music = game.add.audio('background');
-        this.music.play();
-        
         // Title label
         var titleStyle = {
             font: this.titleFontSize.toString() + 'px "Varela Round"',
@@ -78,7 +74,6 @@ Game.Play.prototype = {
     
     // Time ran out
     timeOut: function () {
-        this.music.pause();
         game.state.start('Over');   
     },
     

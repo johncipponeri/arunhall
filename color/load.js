@@ -18,7 +18,11 @@ Game.Load.prototype = {
         label.anchor.setTo(0.5, 0.5);
         
         // load assets here
-        game.load.audio('background', ['background.ogg']);
+        //game.load.audio('background', ['background.ogg']);
+        
+        // Start Music
+        //this.music = game.add.audio('background');
+        //this.music.play();
     },
     
     create: function () {
